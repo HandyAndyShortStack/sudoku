@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "sudoku solver",
   "main": "index.js",
+  "dependencies": {
+    "jasmine": "latest"
+  },
   "scripts": {
     "test": "jasmine"
   },
