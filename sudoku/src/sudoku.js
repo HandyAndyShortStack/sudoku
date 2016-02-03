@@ -1,3 +1,8 @@
-module.exports = function() {
+module.exports = sudoku;
 
+function sudoku(arr) {
+
+  return {
+
+  };
 };
