@@ -6,10 +6,12 @@ var parse = require('../src/parse.js');
 describe('sudoku', function() {
 
   var easyExample = fs.readFileSync('spec/easy_example.csv', 'utf8');
+  var invalidExample = fs.readFileSync('spec/invalid_example.csv', 'utf8');
   var easySudoku;
 
   beforeEach(function() {
     easySudoku = sudoku(parse(easyExample));
+    invalidSudoku = sudoku(parse(invalidExample));
   });
 
   describe('.arr', function() {
@@ -33,7 +35,11 @@ describe('sudoku', function() {
   describe('.isValid', function() {
 
     it('is true if the sudoku is valid', function() {
-      // expect(easySudoku.isValid).toBeTruthy();
+      expect(easySudoku.isValid).toBeTruthy();
+    });
+
+    it('is false if the sudoku is invalid', function() {
+      expect(invalidSudoku.isValid).toBeFalsy();
     });
   });
 });
