@@ -22,4 +22,11 @@ describe('sudoku', function() {
       expect(easySudoku.openIndicies.slice(0, 4)).toEqual([0, 1, 2, 5]);
     });
   });
+
+  describe('.isValid', function() {
+
+    it('is true if the sudoku is valid', function() {
+      // expect(easySudoku.isValid).toBeTruthy();
+    });
+  });
 });
