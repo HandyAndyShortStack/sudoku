@@ -42,20 +42,22 @@ function sudoku(arr, config) {
   }
 
   function increment() {
-    var index;
+    var openIndex = openIndicies.length - 1;
     var newArr = arr.slice();
 
     for (var i = 0; i < openIndicies.length; i += 1) {
       var nextIndex = openIndicies[i];
       if (arr[nextIndex] === 0) {
-        index = openIndicies[i - 1];
+        openIndex = i - 1;
         break; 
       }
     }
 
+    var index = openIndicies[openIndex];
     while (newArr[index] === 9) {
       newArr[index] = 0;
-      index -= 1
+      openIndex -= 1;
+      index = openIndicies[openIndex];
     }
 
     newArr[index] += 1;
@@ -66,12 +68,17 @@ function sudoku(arr, config) {
     });
   }
 
+  function toString() {
+    return arr.join('').match(/.{1,9}/g).join('\n');
+  };
+
   return {
     arr: arr,
     openIndicies: openIndicies,
     isValid: isValid,
     isSolved: isSolved,
     fillNext: fillNext,
-    increment: increment
+    increment: increment,
+    toString: toString
   };
 };

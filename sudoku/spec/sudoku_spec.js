@@ -121,4 +121,12 @@ describe('sudoku', function() {
       });
     });
   });
+
+  describe('#toString', function() {
+
+    it('returns a compact string describing array', function() {
+      expect(easySudoku.toString().slice(0, 9)).toEqual('000260701');
+      expect(easySudoku.toString().slice(10, 19)).toEqual('680070090');
+    });
+  });
 });
