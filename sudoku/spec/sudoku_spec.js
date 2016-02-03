@@ -64,4 +64,12 @@ describe('sudoku', function() {
       expect(filledInvalidSudoku.isSolved).toBeFalsy();
     })
   });
+
+  describe('#fillNext', function() {
+
+    it('returns a new sudoku with the lowest open index filled with a 1', function() {
+      expect(easySudoku.fillNext().arr[0]).toEqual(1);
+      expect(easySudoku.fillNext().fillNext().arr[1]).toEqual(1);
+    });
+  });
 });
