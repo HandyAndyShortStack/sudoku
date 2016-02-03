@@ -19,16 +19,13 @@ function sudoku(arr, config) {
     });
   }
 
-  var index;
-  if (config.index) {
-    index = config.index;
-  }
-
-  var isValid = valid9x9(arr, index);
+  var isValid = valid9x9(arr, config.index);
+  var isSolved = isValid && arr.indexOf(0) === -1;
 
   return {
     arr: arr,
     openIndicies: openIndicies,
-    isValid: isValid
+    isValid: isValid,
+    isSolved: isSolved,
   };
 };
