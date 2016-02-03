@@ -12,6 +12,13 @@ describe('sudoku', function() {
     easySudoku = sudoku(parse(easyExample));
   });
 
+  describe('.arr', function() {
+
+    it('is the array passed to the sudoku function', function() {
+      expect(easySudoku.arr).toEqual(parse(easyExample));
+    });
+  });
+
   describe('.openIndicies', function() {
 
     it('has the same length as the number of empty squares', function() {

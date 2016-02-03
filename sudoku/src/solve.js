@@ -7,7 +7,7 @@ function solve(sudoku) {
   }
 
   if (sudoku.isValid) {
-    solve(sudoku.fillNext());
+    return solve(sudoku.fillNext());
   }
 
   return solve(sudoku.increment());

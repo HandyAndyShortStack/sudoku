@@ -18,6 +18,7 @@ function sudoku(arr, config) {
   }
 
   return {
+    arr: arr,
     openIndicies: openIndicies
   };
 };
