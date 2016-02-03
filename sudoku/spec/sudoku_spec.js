@@ -13,12 +13,28 @@ describe('sudoku', function() {
   var invalidSudoku;
   var solvedSudoku;
   var filledInvalidSudoku;
+  var inProgressBelow9Sudoku;
+  var inProgressAt9Sudoku;
+  var inProgressDoubleAt9Sudoku;
 
   beforeEach(function() {
     easySudoku = sudoku(parse(easyExample));
     invalidSudoku = sudoku(parse(invalidExample));
     solvedSudoku = sudoku(parse(solvedExample));
     filledInvalidSudoku = sudoku(parse(filledInvalidExample));
+
+    inProgressBelow9Sudoku = sudoku(parse(easyExample)).fillNext();
+    inProgressAt9Sudoku = sudoku(parse(easyExample)).fillNext().fillNext();
+    inProgressDoubleAt9Sudoku = sudoku(parse(easyExample)).fillNext().fillNext();
+
+    for (var i = 0; i < 8; i += 1) {
+      inProgressAt9Sudoku = inProgressAt9Sudoku.increment();
+      inProgressDoubleAt9Sudoku = inProgressDoubleAt9Sudoku.increment();
+    }
+    inProgressDoubleAt9Sudoku = inProgressDoubleAt9Sudoku.fillNext();
+    for (var i = 0; i < 8; i += 1) {
+      inProgressDoubleAt9Sudoku = inProgressDoubleAt9Sudoku.increment();
+    }
   });
 
   describe('.arr', function() {
@@ -70,6 +86,39 @@ describe('sudoku', function() {
     it('returns a new sudoku with the lowest open index filled with a 1', function() {
       expect(easySudoku.fillNext().arr[0]).toEqual(1);
       expect(easySudoku.fillNext().fillNext().arr[1]).toEqual(1);
+    });
+  });
+
+  describe('#increment', function() {
+
+    describe('the latest filled square is below 9', function() {
+
+      it('returns a new sudoku with the latest filled square incremented', function() {
+        expect(inProgressBelow9Sudoku.increment().arr[0]).toEqual(2);
+      });
+    });
+
+    describe('the latest filled square is 9', function() {
+
+      it('returns a new sudoku with the latest filled square reset to 0', function() {
+        expect(inProgressAt9Sudoku.increment().arr[1]).toEqual(0);
+      });
+
+      it('returns a new sudoku with the next-to-latest filled square incremented', function() {
+        expect(inProgressAt9Sudoku.increment().arr[0]).toEqual(2);
+      });
+    });
+
+    describe('the latest two filled squares are 9', function() {
+
+      it('returns a new sudoku with the latest two filled squares reset to 0', function() {
+        expect(inProgressDoubleAt9Sudoku.increment().arr[1]).toEqual(0);
+        expect(inProgressDoubleAt9Sudoku.increment().arr[2]).toEqual(0);
+      });
+
+      it('returns a new sudoku with the next-to-next-to-latest filled square incremented', function() {
+        expect(inProgressDoubleAt9Sudoku.increment().arr[0]).toEqual(2);
+      });
     });
   });
 });
