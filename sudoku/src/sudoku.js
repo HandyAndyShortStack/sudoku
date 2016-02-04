@@ -70,7 +70,18 @@ function sudoku(arr, config) {
 
   function toString() {
     return arr.join('').match(/.{1,9}/g).join('\n');
-  };
+  }
+
+  function toCSV() {
+    var output = toString()
+        .trim()
+        .split('\n')
+        .map(function(line) {
+          return line.split('').join(',');
+        })
+        .join('\n');
+    return output + '\n';
+  } 
 
   return {
     arr: arr,
@@ -79,6 +90,7 @@ function sudoku(arr, config) {
     isSolved: isSolved,
     fillNext: fillNext,
     increment: increment,
-    toString: toString
+    toString: toString,
+    toCSV: toCSV
   };
 };

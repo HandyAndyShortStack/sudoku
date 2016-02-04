@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+var parse = require('./src/parse.js');
+var sudoku = require('./src/sudoku.js');
+var solve = require('./src/solve.js');
+
+var input;
+
+process.stdin.setEncoding('utf8');
+process.stdin.on('readable', function() {
+  var chunk = process.stdin.read();
+  if (chunk !== null) {
+    input = chunk;
+  }
+});
+
+process.stdin.on('end', function() {
+  var output = solve(sudoku(parse(input)));
+  process.stdout.write(output.toCSV());
+});

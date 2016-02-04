@@ -129,4 +129,12 @@ describe('sudoku', function() {
       expect(easySudoku.toString().slice(10, 19)).toEqual('680070090');
     });
   });
+
+  describe('#toCSV', function() {
+
+    it('returns a csv string describing the array', function() {
+      expect(easySudoku.toCSV().slice(0, 17)).toEqual('0,0,0,2,6,0,7,0,1');
+      expect(easySudoku.toCSV().slice(18, 35)).toEqual('6,8,0,0,7,0,0,9,0');
+    });
+  });
 });
