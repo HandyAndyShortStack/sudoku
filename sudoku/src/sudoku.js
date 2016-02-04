@@ -5,7 +5,7 @@ module.exports = sudoku;
 function sudoku(arr, config) {
 
   if (typeof config === 'undefined') {
-    config = {}
+    config = {};
   }
 
   if (config.openIndicies) {
