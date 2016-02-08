@@ -25,14 +25,14 @@ describe('sudoku', function() {
     });
   });
 
-  describe('.openIndicies', function() {
+  describe('.openIndices', function() {
 
     it('has the same length as the number of empty squares', function() {
-      expect(easySudoku.openIndicies.length).toEqual(45);
+      expect(easySudoku.openIndices.length).toEqual(45);
     });
 
-    it('is an array of indicies for empty squares', function() {
-      expect(easySudoku.openIndicies.slice(0, 4)).toEqual([0, 1, 2, 5]);
+    it('is an array of indices for empty squares', function() {
+      expect(easySudoku.openIndices.slice(0, 4)).toEqual([0, 1, 2, 5]);
     });
   });
 
