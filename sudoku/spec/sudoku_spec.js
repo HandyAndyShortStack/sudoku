@@ -1,46 +1,27 @@
-var fs = require('fs');
-
-var sudoku = require('../src/sudoku.js');
-var parse = require('../src/parse.js');
+var helpers = require('./support/sudoku_helpers.js');
 
 describe('sudoku', function() {
 
-  var easyExample = fs.readFileSync('spec/easy_example.csv', 'utf8');
-  var invalidExample = fs.readFileSync('spec/invalid_example.csv', 'utf8');
-  var solvedExample = fs.readFileSync('spec/solved_example.csv', 'utf8');
-  var filledInvalidExample = fs.readFileSync('spec/filled_invalid_example.csv', 'utf8');
-  var easySudoku;
-  var invalidSudoku;
-  var solvedSudoku;
-  var filledInvalidSudoku;
-  var inProgressBelow9Sudoku;
-  var inProgressAt9Sudoku;
-  var inProgressDoubleAt9Sudoku;
+  var easySudoku = helpers.getSudoku('easy');
+  var invalidSudoku = helpers.getSudoku('invalid');
+  var solvedSudoku = helpers.getSudoku('solved');
+  var filledInvalidSudoku = helpers.getSudoku('filled_invalid');
 
-  beforeEach(function() {
-    easySudoku = sudoku(parse(easyExample));
-    invalidSudoku = sudoku(parse(invalidExample));
-    solvedSudoku = sudoku(parse(solvedExample));
-    filledInvalidSudoku = sudoku(parse(filledInvalidExample));
+  var inProgressBelow9Sudoku = helpers.getSudoku('easy');
+  var inProgressAt9Sudoku = helpers.getSudoku('easy');
+  var inProgressDoubleAt9Sudoku = helpers.getSudoku('easy');
 
-    inProgressBelow9Sudoku = sudoku(parse(easyExample)).fillNext();
-    inProgressAt9Sudoku = sudoku(parse(easyExample)).fillNext().fillNext();
-    inProgressDoubleAt9Sudoku = sudoku(parse(easyExample)).fillNext().fillNext();
-
-    for (var i = 0; i < 8; i += 1) {
-      inProgressAt9Sudoku = inProgressAt9Sudoku.increment();
-      inProgressDoubleAt9Sudoku = inProgressDoubleAt9Sudoku.increment();
-    }
-    inProgressDoubleAt9Sudoku = inProgressDoubleAt9Sudoku.fillNext();
-    for (var i = 0; i < 8; i += 1) {
-      inProgressDoubleAt9Sudoku = inProgressDoubleAt9Sudoku.increment();
-    }
-  });
+  inProgressBelow9Sudoku.arr[0] = 1;
+  inProgressAt9Sudoku.arr[0] = 1;
+  inProgressAt9Sudoku.arr[1] = 9;
+  inProgressDoubleAt9Sudoku.arr[0] = 1;
+  inProgressDoubleAt9Sudoku.arr[1] = 9;
+  inProgressDoubleAt9Sudoku.arr[2] = 9;
 
   describe('.arr', function() {
 
     it('is the array passed to the sudoku function', function() {
-      expect(easySudoku.arr).toEqual(parse(easyExample));
+      expect(easySudoku.arr).toEqual(helpers.parseCSV('easy'));
     });
   });
 
