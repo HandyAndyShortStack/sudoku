@@ -1,20 +1,12 @@
-var fs = require('fs');
+var helpers = require('./support/sudoku_helpers.js');
 
 var solve = require('../src/solve.js');
-var sudoku = require('../src/sudoku.js');
-var parse = require('../src/parse.js');
 
 describe('solve', function() {
 
-  var easySudoku;
-  var solvedSudoku;
-  var blankSudoku;
-
-  beforeEach(function() {
-    easySudoku = sudoku(parse(fs.readFileSync('spec/easy_example.csv', 'utf8')));
-    solvedSudoku = sudoku(parse(fs.readFileSync('spec/solved_example.csv', 'utf8')));
-    blankSudoku = sudoku(parse(fs.readFileSync('spec/blank_example.csv', 'utf8')));
-  });
+  var easySudoku = helpers.getSudoku('easy');
+  var solvedSudoku = helpers.getSudoku('solved');
+  var blankSudoku = helpers.getSudoku('blank');
 
   describe('given a valid sudoku', function() {
 
