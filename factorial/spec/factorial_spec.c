@@ -1,6 +1,6 @@
 #include <assert.h>
 
-#include "factorial.c"
+#include "../factorial.c"
 
 int main() {
   assert(factorial(2) == 2);
