@@ -1,12 +1,11 @@
-var fs = require('fs');
+var helpers = require('./support/sudoku_helpers.js');
 
 var valid9x9 = require('../src/valid9x9.js');
-var parse = require('../src/parse.js');
 
 describe('valid9x9', function() {
 
-  var valid = parse(fs.readFileSync('spec/easy_example.csv', 'utf8'));
-  var invalid = parse(fs.readFileSync('spec/invalid_example.csv', 'utf8'));
+  var valid = helpers.parseCSV('easy');
+  var invalid = helpers.parseCSV('invalid');
 
   describe('given a valid sudoku array', function() {
 
