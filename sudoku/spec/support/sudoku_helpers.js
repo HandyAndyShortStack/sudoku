@@ -10,7 +10,7 @@ var parse = require('../../src/parse.js');
 var sudoku = require('../../src/sudoku.js');
 
 function readCSV(name) {
-  return fs.readFileSync('spec/' + name + '_example.csv', 'utf8');
+  return fs.readFileSync('spec/support/' + name + '_example.csv', 'utf8');
 }
 
 function parseCSV(name) {
