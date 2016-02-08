@@ -1,10 +1,10 @@
-var fs = require('fs');
+var helpers = require('./support/sudoku_helpers.js');
 
 var parse = require('../src/parse.js');
 
 describe('parse', function() {
 
-  var easyExample = fs.readFileSync('spec/easy_example.csv', 'utf8');
+  var easyExample = helpers.readCSV('easy');
   var result;
 
   beforeEach(function() {
