@@ -47,3 +47,10 @@ The `solve` function first checks if the sudoku is solved, and returns the sudok
 
 ### increment() and Backtracking
 The `increment` function looks for the highest indexed cell filled by the solver.  If the value of that cell is less than 9, the cell value is incremented by one.  If the value of the highest indexed cell filled by the solver is 9, the value of that cell is reset to 0.  This process is repeated until a cell with a value less than 9 is found and incremented.  In this way the `increment` function can potentially backtrack all the way to the first open cell.
+
+## Efficiency
+"Our intuitions about how programs spend their time is usually completely wrong."  
+-[Douglas Crockford](https://www.youtube.com/watch?v=NPlMcUxFOlY&m=27&s=49)
+
+For this program I consider n to be the set of unfilled cells in the input sudoku.  Checking sudoku validity and completeness, filling the next empty cell with a 1, and incrementing the last filled cell when its value is less than 9 are all individually so inexpensive that I will not consider them to be significant factors in the time complexity of the program.  All of these operations, however, are compounded when the program backtracks.  In the best case scenario for the configuration of n, the program will never have to backtrack and its performance will scale linearly as n scales - O(n).  Usually we can expect that backtracks will be spread out fairly evenly across the input.  In this, the expected case, performance will scale exponentially with n - somewhare in the order of O(2^n).  For inputs requiring a lot of backtracking, the program's performance will move towards factorial space.  Given worst case input, the program will perform somewhere beween exponential and factorial space.  O(n!) is never actually reached though.
+
