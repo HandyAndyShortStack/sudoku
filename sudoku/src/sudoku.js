@@ -32,7 +32,7 @@ function sudoku(arr, config) {
     toString: toString.bind(null, arr),
     toCSV: toCSV.bind(null, arr)
   };
-};
+}
 
 function fillNext(arr, openIndices) {
   var index;
