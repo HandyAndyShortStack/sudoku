@@ -92,8 +92,23 @@ While I prefer RSpec, I am comfortable using jasmine to test my javascript proje
 One of the first files I wrote for this program was the recursive `solve` function explained earlier in the "How it Works" section.  I consider this to be a very beautiful function.  I was eager to try out tail recursion in javascript, as it is included in the ES6 standard.  This was a poor decision.  Node/v8 doesn't yet implement tail call optimization.  Because of my insufficient research on the subject I had to replace my lovely recursive `solve` function with an ugly iterative version or overrun my call stack when the program ran with some valid inputs.
 
 #### Architecture and Design Patterns
-Even though the challenge document included explicit language stating "You must use an object oriented approach", I knew I wanted to write this program functionally at the outset.  The excteption to this was the object oriented design of the `sudoku` objects.  `sudoku` includes initializing code, instance properties, and instance variables.  Though I did not make use of `Object.freeze` or the 'writable' and 'configurable' metaproperties accessible through `Object.defineProperties`, `sudoku` objects are meant to be immuatable once initialized.  This made testing much easier than I am accustomed to, as I did not have to deal with reinititalizing `sudoku` objects in each individual test.  It also made them play nice with the more functionally designed areas of the program.
+Even though the challenge document included explicit language stating "You must use an object oriented approach", I knew I wanted to write this program functionally at the outset.  The exception to this was the object oriented design of the `sudoku` objects.  `sudoku` includes initializing code, instance properties, and instance variables.  Though I did not make use of `Object.freeze` or the 'writable' and 'configurable' metaproperties accessible through `Object.defineProperties`, `sudoku` objects are meant to be immuatable once initialized.  This made testing much easier than I am accustomed to, as I did not have to deal with reinititalizing `sudoku` objects in each individual test.  It also made them play nice with the more functionally designed areas of the program.
 
 ### Regrets
-"I've had a few.  But then again, too few to mention."
+"I've had a few.  But then again, too few to mention."  
 -Paul Anka
+
+I wish I were more like Paul.  
+*Sigh.*
+
+#### Dealing with Bad Input
+My program does not deal gracefully with bad input.  It throws no appropriate errors when given input of the wrong length or format.  While a solution is guaranteed eventually for all valid sudoku inputs, there is a sizable class of invalid inputs that will cause the program to run forever without error.  This is a serious flaw that I would have liked to address had I budgeted more time for the project.
+
+#### Extensibility
+Though only classic 9x9 sudokus were mentioned in the challenge document, I wanted to make extending the capability of this program to deal with other sudoku formats as easy as possible.  To this end I separated the task of checking sudoku validity into its own `valid9x9` function, but both the `fillNext` and `increment` functions included as instance methods of `sudoku` objects are impaired in the extensibility by expecting only numeric cell values.  Also, the `increment` function is hard coded to cap cell values at 9.  I could have done a better job at making `sudoku` extensible, but I realize too that doing so would probably be premature optimization.
+
+#### Performance Optimizations
+I was able to speed up my sudoku validity checking by making `valid9x9` take an optional index argument that makes the function only check if the value at the specified cell index conflicts with the values of other cells in that cell's row, column, or box.  I realize that I could have included a similar optimization in the `fillNext` and `increment` functions by passing the index within the `openIndices` array of the latest filled cell's index to these functions through the `sudoku` function's `config` object.  This would save time looking for the latest filled cell's `openIndices` index on each call to those functions.  There are certainly other places where I could trade a little memory for a lot of time, but I would need to meditate more to uncover them.
+
+### Conclusion
+This is the kind of project that got me interested in programming in the first place.  I love solving problems and juggling complexity in my head.  Though it has some serious flaws, I am happy with how my solution turned out and I had a great time working on it.  I hope you find my code and my English easy to read and understand.
