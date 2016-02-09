@@ -1,0 +1,42 @@
+# (Andy) Short Technical Communication Questions
+
+1. What does O(n) mean? O(n^2)?
+
+To me, O(n) is a label signifying that some measure of an algorithm's
+performance (usually running time) scales linearly with the size of its input.
+O(n^2) signifies that an algorithm's performance scales exponentially with the
+size of its input.  This is often because of nested iteration over the input.
+
+2. Describe the quick sort algorithm.
+
+Quicksort is a very good general purpose sorting algorithm that usually runs in
+linearithmic (O(n log n)) time, but can tend toward quadratic (O(n^2)) time
+with some unfortunate inputs.  It is implemented by choosing a pivot element,
+ensuring that all elements smaller than the pivot are to the left of the
+pivot's location and that all elements larger than the pivot are to the right
+of the pivot's location, then recursing to the subarrays on either side of the
+pivot.
+
+3. In C, what is a pointer?
+
+In C, a pointer is a data type containing a memory address.  A pointer can
+serve as a reference to the actual value held in the memory it points to.
+Reading the value of the memory address stored in a pointer is called
+dereferencing.
+
+4. What is the difference between Stack and Heap memory?
+
+Stack memory is a portion of system memory that is fast to access, efficiently
+organized, and automatically deallocated.  It is intended for relatively small
+variables used locally by functions, and there is a limit on how much stack
+memory can be used.  Heap memory is unlimited in size, but it is somewhat
+slower to access, must be explicitly allocated and deallocated, and can become
+fragmented.
+
+5. What is the purpose of a garbage collector?
+
+Garbage collectors free programmers from manually managing memory at the price
+of performance.  Typically a garbage collector will automatically free the
+memory associated with an object once all references to the object are removed.
+Garbage collection helps prevent memory leaks in programs, and prevents the
+creation of some memory mismanagement bugs.
