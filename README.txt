@@ -91,3 +91,9 @@ While I prefer RSpec, I am comfortable using jasmine to test my javascript proje
 ##### Tail Recursion
 One of the first files I wrote for this program was the recursive `solve` function explained earlier in the "How it Works" section.  I consider this to be a very beautiful function.  I was eager to try out tail recursion in javascript, as it is included in the ES6 standard.  This was a poor decision.  Node/v8 doesn't yet implement tail call optimization.  Because of my insufficient research on the subject I had to replace my lovely recursive `solve` function with an ugly iterative version or overrun my call stack when the program ran with some valid inputs.
 
+#### Architecture and Design Patterns
+Even though the challenge document included explicit language stating "You must use an object oriented approach", I knew I wanted to write this program functionally at the outset.  The excteption to this was the object oriented design of the `sudoku` objects.  `sudoku` includes initializing code, instance properties, and instance variables.  Though I did not make use of `Object.freeze` or the 'writable' and 'configurable' metaproperties accessible through `Object.defineProperties`, `sudoku` objects are meant to be immuatable once initialized.  This made testing much easier than I am accustomed to, as I did not have to deal with reinititalizing `sudoku` objects in each individual test.  It also made them play nice with the more functionally designed areas of the program.
+
+### Regrets
+"I've had a few.  But then again, too few to mention."
+-Paul Anka
