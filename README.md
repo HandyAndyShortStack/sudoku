@@ -5,7 +5,7 @@ This is a brute force backtracking sudoku solver.  It is written in javascript u
 The `solve` program takes a valid sudoku in CSV format from stdin, and writes the completed sudoku to stdout.  Here is an example usage assuming that `pwd` is the directory containing this readme file:
 
 ```
-cat sudoku/spec/support/easy_example.csv | sudoku/solve
+cat spec/support/easy_example.csv | ./solve
 ```
 
 This should output the following to your terminal:
@@ -23,7 +23,7 @@ This should output the following to your terminal:
 ```
 
 ## Running the Tests
-In order to run the tests, you will need [npm](https://www.npmjs.com/).  `cd` into the `sudoku` directory and run `npm install`.  To run the tests use the command `npm test` from the `sudoku` directory.
+In order to run the tests, you will need [npm](https://www.npmjs.com/).  Run `npm install` in the project rood directory.  To run the tests use the command `npm test` from the same location.
 
 ## How It Works
 My solver uses a brute force technique with backtracking.  This approach is perhaps best understood by reading my original recursive `solve` function, which can be found in `sudoku/src/solve.js`:
